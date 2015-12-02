@@ -14,7 +14,7 @@
 namespace Graze\Formatter;
 
 /**
- * This trait provides an implmentation for the `addProcessor` method defined in
+ * This trait provides an implementation for the `addProcessor` method defined in
  * {@see \Graze\Formatter\FormatterInterface}.
  *
  * @author Samuel Parkinson <sam@graze.com>
