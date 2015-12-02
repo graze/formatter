@@ -10,7 +10,7 @@ class MockFormatter extends AbstractFormatter
 {
     private $count = 0;
 
-    public function generate($item)
+    protected function generate($item)
     {
         $this->count += 1;
 

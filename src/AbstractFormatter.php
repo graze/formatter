@@ -21,15 +21,6 @@ abstract class AbstractFormatter implements FormatterInterface
     use ProcessorCollectionTrait;
 
     /**
-     * Convert `$item` into an formatted array of data.
-     *
-     * @param mixed $item
-     *
-     * @return array
-     */
-    abstract public function generate($item);
-
-    /**
      * @param mixed $item
      *
      * @return array
@@ -53,16 +44,24 @@ abstract class AbstractFormatter implements FormatterInterface
     }
 
     /**
+     * Convert `$item` into an formatted array of data.
+     *
+     * @param mixed $item
+     *
+     * @return array
+     */
+    abstract protected function generate($item);
+
+    /**
      * Interate over each processor registered with the formatter and pass it
-     * the data array and the item being formatted as arguments. Returning the
-     * resulting data array after all the processors have done their work.
+     * the aggregated data array and the item being formatted as arguments.
      *
      * @param array $data
      * @param mixed $item
      *
      * @return array
      */
-    protected function handleProcessors(array $data, $item)
+    private function handleProcessors(array $data, $item)
     {
         // Callable that passes the procesor the correct arguments.
         $process = function(array $data, callable $processor) use ($item) {
