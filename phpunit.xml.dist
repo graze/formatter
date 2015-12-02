@@ -1,0 +1,36 @@
+<phpunit colors="true" verbose="true">
+
+    <!-- Test suites -->
+    <testsuites>
+
+        <testsuite name="unit">
+            <directory>tests/unit/</directory>
+        </testsuite>
+
+    </testsuites>
+
+    <!-- Coverage filter -->
+    <filter>
+
+        <whitelist>
+            <directory>src/</directory>
+        </whitelist>
+
+    </filter>
+
+    <!-- Coverage reporting -->
+    <logging>
+
+        <log type="coverage-text"
+             target="php://stdout" />
+
+    </logging>
+
+    <listeners>
+
+        <listener class="\Mockery\Adapter\Phpunit\TestListener"></listener>
+        <listener class="\Hamcrest\Adapter\PHPUnit\TestListener"></listener>
+
+    </listeners>
+
+</phpunit>

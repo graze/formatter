@@ -1,0 +1,9 @@
+language: php
+
+sudo: false
+
+install:
+  - composer update --prefer-source --no-interaction
+
+script:
+  - vendor/bin/phpunit --testsuite unit
