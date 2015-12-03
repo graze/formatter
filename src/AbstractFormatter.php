@@ -13,12 +13,16 @@
 
 namespace Graze\Formatter;
 
+use Graze\Sort;
+
 /**
  * @author Samuel Parkinson <sam@graze.com>
  */
 abstract class AbstractFormatter implements FormatterInterface
 {
     use ProcessorCollectionTrait;
+
+    use SorterCollectionTrait;
 
     /**
      * @param mixed $item
@@ -39,8 +43,13 @@ abstract class AbstractFormatter implements FormatterInterface
      */
     public function formatMany(array $items)
     {
-        // Return the result of calling `format` on each item.
-        return array_map([$this, 'format'], $items);
+        $formatted = array_map([$this, 'format'], $items);
+
+        // @todo Handle filters.
+
+        $sorted = $this->handleSorters($formatted);
+
+        return $sorted;
     }
 
     /**
@@ -69,5 +78,19 @@ abstract class AbstractFormatter implements FormatterInterface
         };
 
         return array_reduce($this->processors, $process, $data);
+    }
+
+    /**
+     * @param $data
+     *
+     * @return array
+     */
+    private function handleSorters(array $data)
+    {
+        if ($this->sorters) {
+            return Sort::schwartzian($data, $this->sorters);
+        }
+
+        return $data;
     }
 }
