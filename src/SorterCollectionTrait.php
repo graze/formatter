@@ -14,28 +14,23 @@
 namespace Graze\Formatter;
 
 /**
+ * This trait provides an implementation for the `addSorter` method defined in
+ * {@see \Graze\Formatter\FormatterInterface}.
+ *
  * @author Samuel Parkinson <sam@graze.com>
- * @author Simon Lawrence <silawrenc@gmail.com>
  */
-interface FormatterInterface
+trait SorterCollectionTrait
 {
+    /**
+     * @var callable[]
+     */
+    protected $sorters = [];
+
     /**
      * @param callable $processor
      */
-    public function addProcessor(callable $processor);
-
-    /**
-     * @param callable $sorter
-     */
-    public function addSorter(callable $sorter);
-
-    /**
-     * @param mixed $item
-     */
-    public function format($item);
-
-    /**
-     * @param array $items
-     */
-    public function formatMany(array $items);
+    public function addSorter(callable $sorter)
+    {
+        array_unshift($this->sorters, $sorter);
+    }
 }
