@@ -14,27 +14,25 @@
 namespace Graze\Formatter;
 
 /**
- * This trait provides an implementation for {@see Graze\Formatter\SorterAwareInterface}.
+ * This trait provides an implementation for {@see Graze\Formatter\FilterAwareInterface}.
  *
  * @author Samuel Parkinson <sam@graze.com>
  */
-trait SorterAwareTrait
+trait FilterAwareTrait
 {
     /**
      * @var callable[]
      */
-    protected $sorters = [];
+    protected $filters = [];
 
     /**
-     * Add the sorter to the top of the stack.
-     *
-     * @param callable $sorter
+     * @param callable $filter
      *
      * @return Graze\Formatter\FormatterInterface
      */
-    public function addSorter(callable $sorter)
+    public function addFilter(callable $filter)
     {
-        array_unshift($this->sorters, $sorter);
+        array_unshift($this->filters, $filter);
 
         return $this;
     }

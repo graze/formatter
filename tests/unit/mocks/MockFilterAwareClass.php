@@ -11,19 +11,20 @@
  * @license https://github.com/graze/formatter/blob/master/LICENSE MIT
  */
 
-namespace Graze\Formatter;
+use Graze\Formatter\FilterAwareTrait;
 
 /**
- * Describes a sorter-aware instance.
- *
- * @author Samuel Parkinson <sam@graze.com>
+ * A mock that uses the {@see FilterAwareTrait} trait.
  */
-interface SorterAwareInterface
+class MockFilterAwareClass
 {
+    use FilterAwareTrait;
+
     /**
-     * @param callable $sorter
-     *
-     * @return Graze\Formatter\FormatterInterface
+     * @return array
      */
-    public function addSorter(callable $sorter);
+    public function getFilters()
+    {
+        return $this->filters;
+    }
 }

@@ -13,103 +13,118 @@
 
 namespace Graze\Formatter;
 
+use function Graze\Sort\schwartzian;
 use Graze\Formatter\FormatterInterface;
 use Graze\Formatter\ProcessorAwareInterface;
 use Graze\Formatter\ProcessorAwareTrait;
 use Graze\Formatter\SorterAwareInterface;
 use Graze\Formatter\SorterAwareTrait;
-use Graze\Sort;
 
 /**
  * @author Samuel Parkinson <sam@graze.com>
  */
-abstract class AbstractFormatter implements FormatterInterface, ProcessorAwareInterface, SorterAwareInterface
+abstract class AbstractFormatter implements
+    FormatterInterface,
+    ProcessorAwareInterface,
+    SorterAwareInterface,
+    FilterAwareInterface
 {
     use ProcessorAwareTrait;
 
     use SorterAwareTrait;
 
+    use FilterAwareTrait;
+
     /**
-     * @param mixed $item
+     * Format the given item, applying all registered processors before returning the result.
+     *
+     * Each processor will get called with two arguments:
+     *
+     * * `$data`, the result of calling `generate`
+     * * `$object`, the argument that was passed to `generate`
+     *
+     * Calls `generate` to initally convert `$object` into an array.
+     *
+     * @param mixed $object
      *
      * @return array
      */
-    public function format($item)
+    public function format($object)
     {
-        $data = $this->generate($item);
+        /**
+         * @var array
+         */
+        $formatted = $this->generate($object);
 
-        return $this->handleProcessors($data, $item);
+        if ($this->processors) {
+            // Callable that passes the processor the correct arguments.
+            $process = function(array $data, callable $processor) use ($object) {
+                return $processor($data, $object);
+            };
+
+            // Call each processor with the formatted object.
+            return array_reduce($this->processors, $process, $formatted);
+        }
+
+        return $formatted;
     }
 
     /**
-     * @param array $items
+     * Format an array of objects, applying all registered processors, sorters
+     * and filters before returning the result.
+     *
+     * @param array $objects
      *
      * @return array
      */
-    public function formatMany(array $items)
+    public function formatMany(array $objects)
     {
-        $formatted = array_map([$this, 'format'], $items);
+        $formatted = array_map([$this, 'format'], $objects);
 
-        // @todo Handle filters.
-        $filtered = $this->handleFilters($formatted);
+        $filtered = $this->filter($formatted);
 
-        $sorted = $this->handleSorters($filtered);
-
-        return $sorted;
+        return $this->sort($filtered);
     }
 
     /**
-     * Convert `$item` into an formatted array of data.
+     * Convert the `$object` argument into a formatted array of data.
      *
-     * @param mixed $item
-     *
-     * @return array
-     */
-    abstract protected function generate($item);
-
-    /**
-     * Interate over each processor registered with the formatter and pass it
-     * the aggregated data array and the item being formatted as arguments.
-     *
-     * @param array $datum
-     * @param mixed $item
+     * @param mixed $object
      *
      * @return array
      */
-    private function handleProcessors(array $datum, $item)
-    {
-        // Callable that passes the procesor the correct arguments.
-        $process = function(array $datum, callable $processor) use ($item) {
-            return $processor($datum, $item);
-        };
-
-        return array_reduce($this->processors, $process, $datum);
-    }
+    abstract protected function generate($object);
 
     /**
      * Interate over each filter registered with the formatter and remove
      * any matching elements.
      *
-     * @param array $data
+     * @param array $unfiltered
      *
      * @return array
      */
-    private function handleFilters(array $data)
+    private function filter(array $unfiltered)
     {
-        return $data;
+        if ($this->filters) {
+            return array_reduce($this->filters, 'array_filter', $unfiltered);
+        }
+
+        return $unfiltered;
     }
 
     /**
-     * @param $data
+     * Apply any registered sorters.
+     *
+     * @param array $unsorted
      *
      * @return array
      */
-    private function handleSorters(array $data)
+    private function sort(array $unsorted)
     {
         if ($this->sorters) {
-            return Sort::schwartzian($data, $this->sorters);
+            return schwartzian($unsorted, $this->sorters);
         }
 
-        return $data;
+        return $unsorted;
     }
 }

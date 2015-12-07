@@ -14,18 +14,28 @@
 namespace Graze\Formatter;
 
 /**
+ * Describes a ...
+ *
  * @author Samuel Parkinson <sam@graze.com>
  * @author Simon Lawrence <silawrenc@gmail.com>
  */
 interface FormatterInterface
 {
     /**
+     * Format the given item into an array of data.
+     *
      * @param mixed $item
+     *
+     * @return array
      */
     public function format($item);
 
     /**
+     * Format the given items into an array of arrays.
+     *
      * @param array $items
+     *
+     * @return array
      */
     public function formatMany(array $items);
 }

@@ -14,11 +14,16 @@
 namespace Graze\Formatter;
 
 /**
+ * Abstract class that can be passed to the `addProcessor` method
+ * on an {@see Graze\Formatter\AbstractFormatter}.
+ *
  * @author Samuel Parkinson <sam@graze.com>
  */
 abstract class AbstractProcessor
 {
     /**
+     * Implemented to make the class callable. Calls the `process` method.
+     *
      * @param array $data
      * @param mixed $item
      *
@@ -30,6 +35,10 @@ abstract class AbstractProcessor
     }
 
     /**
+     * Method to modify the given array of data.
+     *
+     * This must return an array, typically the `$data` argument after modification.
+     *
      * @param array $data
      * @param mixed $item
      *

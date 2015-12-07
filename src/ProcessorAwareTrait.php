@@ -21,15 +21,21 @@ namespace Graze\Formatter;
 trait ProcessorAwareTrait
 {
     /**
+     * The registered processor callables.
+     *
      * @var callable[]
      */
     protected $processors = [];
 
     /**
      * @param callable $processor
+     *
+     * @return Graze\Formatter\FormatterInterface
      */
     public function addProcessor(callable $processor)
     {
         $this->processors[] = $processor;
+
+        return $this;
     }
 }

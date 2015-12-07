@@ -14,12 +14,16 @@
 namespace Graze\Formatter;
 
 /**
+ * Describes a processor-aware instance.
+ *
  * @author Samuel Parkinson <sam@graze.com>
  */
 interface ProcessorAwareInterface
 {
     /**
      * @param callable $processor
+     *
+     * @return Graze\Formatter\FormatterInterface
      */
     public function addProcessor(callable $processor);
 }
