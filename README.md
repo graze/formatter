@@ -91,4 +91,4 @@ Array
 )
 ```
 
-Find more examples in the [`examples/`](/examples) folder, and more documentation under [`docs/`](/docs).
+Find more documentation under [`docs/`](/docs).
