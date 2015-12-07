@@ -11,20 +11,20 @@
  * @license https://github.com/graze/formatter/blob/master/LICENSE MIT
  */
 
-use Graze\Formatter\ProcessorCollectionTrait;
+use Graze\Formatter\SorterAwareTrait;
 
 /**
- * A mock that uses the {@see ProcessorCollectionTrait} trait.
+ * A mock that uses the {@see SorterAwareTrait} trait.
  */
-class MockProcessorCollection
+class MockSorterAwareClass
 {
-    use ProcessorCollectionTrait;
+    use SorterAwareTrait;
 
     /**
      * @return array
      */
-    public function getProcessors()
+    public function getSorters()
     {
-        return $this->processors;
+        return $this->sorters;
     }
 }

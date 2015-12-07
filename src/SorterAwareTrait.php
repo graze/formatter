@@ -14,23 +14,24 @@
 namespace Graze\Formatter;
 
 /**
- * This trait provides an implementation for the `addProcessor` method defined in
- * {@see \Graze\Formatter\FormatterInterface}.
+ * This trait provides an implementation for {@see Graze\Formatter\SorterAwareInterface}.
  *
  * @author Samuel Parkinson <sam@graze.com>
  */
-trait ProcessorCollectionTrait
+trait SorterAwareTrait
 {
     /**
      * @var callable[]
      */
-    protected $processors = [];
+    protected $sorters = [];
 
     /**
+     * Add the sorter to the top of the stack.
+     *
      * @param callable $processor
      */
-    public function addProcessor(callable $processor)
+    public function addSorter(callable $sorter)
     {
-        $this->processors[] = $processor;
+        array_unshift($this->sorters, $sorter);
     }
 }

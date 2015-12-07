@@ -12,13 +12,13 @@
  */
 
 /**
- * Tests for {@see \Graze\Formatter\SorterCollectionTrait} using the mock {@see MockSorterCollection}.
+ * Tests for {@see \Graze\Formatter\SorterAwareTrait} using the mock {@see MockSorterAwareClass}.
  */
-class SorterCollectionTraitTest extends \PHPUnit_Framework_TestCase
+class SorterAwareTraitTest extends \PHPUnit_Framework_TestCase
 {
     public function testTraitShouldAddCallablesAsSorters()
     {
-        $mock = new MockSorterCollection();
+        $mock = new MockSorterAwareClass();
 
         $sorter = function () {
             return 0;
@@ -35,7 +35,7 @@ class SorterCollectionTraitTest extends \PHPUnit_Framework_TestCase
 
     public function testTraitShouldAddSortersAsTheFirstSorterInTheCollection()
     {
-        $mock = new MockSorterCollection();
+        $mock = new MockSorterAwareClass();
 
         $sorterOne = function () {
             return 0;

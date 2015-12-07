@@ -13,16 +13,21 @@
 
 namespace Graze\Formatter;
 
+use Graze\Formatter\FormatterInterface;
+use Graze\Formatter\ProcessorAwareInterface;
+use Graze\Formatter\ProcessorAwareTrait;
+use Graze\Formatter\SorterAwareInterface;
+use Graze\Formatter\SorterAwareTrait;
 use Graze\Sort;
 
 /**
  * @author Samuel Parkinson <sam@graze.com>
  */
-abstract class AbstractFormatter implements FormatterInterface
+abstract class AbstractFormatter implements FormatterInterface, ProcessorAwareInterface, SorterAwareInterface
 {
-    use ProcessorCollectionTrait;
+    use ProcessorAwareTrait;
 
-    use SorterCollectionTrait;
+    use SorterAwareTrait;
 
     /**
      * @param mixed $item
@@ -46,8 +51,9 @@ abstract class AbstractFormatter implements FormatterInterface
         $formatted = array_map([$this, 'format'], $items);
 
         // @todo Handle filters.
+        $filtered = $this->handleFilters($formatted);
 
-        $sorted = $this->handleSorters($formatted);
+        $sorted = $this->handleSorters($filtered);
 
         return $sorted;
     }
@@ -65,19 +71,32 @@ abstract class AbstractFormatter implements FormatterInterface
      * Interate over each processor registered with the formatter and pass it
      * the aggregated data array and the item being formatted as arguments.
      *
-     * @param array $data
+     * @param array $datum
      * @param mixed $item
      *
      * @return array
      */
-    private function handleProcessors(array $data, $item)
+    private function handleProcessors(array $datum, $item)
     {
         // Callable that passes the procesor the correct arguments.
-        $process = function(array $data, callable $processor) use ($item) {
-            return $processor($data, $item);
+        $process = function(array $datum, callable $processor) use ($item) {
+            return $processor($datum, $item);
         };
 
-        return array_reduce($this->processors, $process, $data);
+        return array_reduce($this->processors, $process, $datum);
+    }
+
+    /**
+     * Interate over each filter registered with the formatter and remove
+     * any matching elements.
+     *
+     * @param array $data
+     *
+     * @return array
+     */
+    private function handleFilters(array $data)
+    {
+        return $data;
     }
 
     /**

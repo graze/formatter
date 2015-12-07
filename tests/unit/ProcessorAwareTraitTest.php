@@ -12,13 +12,13 @@
  */
 
 /**
- * Tests for {@see \Graze\Formatter\ProcessorCollectionTrait} using the mock {@see MockProcessorCollection}.
+ * Tests for {@see \Graze\Formatter\ProcessorAwareTrait} using the mock {@see MockProcessorAwareClass}.
  */
-class ProcessorCollectionTraitTest extends \PHPUnit_Framework_TestCase
+class ProcessorAwareTraitTest extends \PHPUnit_Framework_TestCase
 {
     public function testTraitShouldAddCallablesAsProcessors()
     {
-        $mock = new MockProcessorCollection();
+        $mock = new MockProcessorAwareClass();
 
         $processor = function () {
             return [];

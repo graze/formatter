@@ -15,17 +15,11 @@ namespace Graze\Formatter;
 
 /**
  * @author Samuel Parkinson <sam@graze.com>
- * @author Simon Lawrence <silawrenc@gmail.com>
  */
-interface FormatterInterface
+interface ProcessorAwareInterface
 {
     /**
-     * @param mixed $item
+     * @param callable $processor
      */
-    public function format($item);
-
-    /**
-     * @param array $items
-     */
-    public function formatMany(array $items);
+    public function addProcessor(callable $processor);
 }

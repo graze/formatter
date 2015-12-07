@@ -14,18 +14,22 @@
 namespace Graze\Formatter;
 
 /**
+ * This trait provides an implementation for {@see Graze\Formatter\ProcessorAwareInterface}.
+ *
  * @author Samuel Parkinson <sam@graze.com>
- * @author Simon Lawrence <silawrenc@gmail.com>
  */
-interface FormatterInterface
+trait ProcessorAwareTrait
 {
     /**
-     * @param mixed $item
+     * @var callable[]
      */
-    public function format($item);
+    protected $processors = [];
 
     /**
-     * @param array $items
+     * @param callable $processor
      */
-    public function formatMany(array $items);
+    public function addProcessor(callable $processor)
+    {
+        $this->processors[] = $processor;
+    }
 }
