@@ -1,49 +1,16 @@
 # Sorters
 
+Sorters can be used to sort the final result.
+
+Sorters are only applied when calling `FormatterInterface::formatMany`.
+
+## Usage
+
 ```php
-// Create a processor we can sort with.
-$position = 0;
-$processor = function (array $data, $item) use (&$position) {
-    $data['position'] = $position++;
-
-    return $data;
-};
-$formatter->addProcessor($processor);
-
-// Reverse the order of the result using a sorter.
 $sorter = function (array $data) {
-    return -$data['position'];
+    // Sort by count in descending order.
+    return $data['count'] * -1;
 };
 
 $formatter->addSorter($sorter);
-
-$result = $formatter->formatMany([$countable, $countable, $countable]);
-
-print_r($result);
-```
-
-The above example will output:
-
-```
-Array
-(
-    [0] => Array
-        (
-            [count] => 42
-            [position] => 2
-        )
-
-    [1] => Array
-        (
-            [count] => 42
-            [position] => 1
-        )
-
-    [2] => Array
-        (
-            [count] => 42
-            [position] => 0
-        )
-
-)
 ```

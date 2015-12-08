@@ -1,5 +1,7 @@
 # Processors
 
+Processors can be used to extend the functionality of a formatter.
+
 ## Using Anonymous Functions
 
 ```php
@@ -12,19 +14,9 @@ $processor = function (array $data, $item) {
 $formatter->addProcessor($processor);
 ```
 
-The above example will output:
-
-```
-Array
-(
-    [count] => 42
-    [class] => MeaningOfLifeCountable
-)
-```
-
 ## Using Graze\Formatter\AbstractProcessor
 
-```
+```php
 use Graze\Formatter\AbstractProcessor;
 
 final class ClassNameProcessor extends AbstractProcessor
@@ -38,14 +30,4 @@ final class ClassNameProcessor extends AbstractProcessor
 }
 
 $formatter->addProcessor(new ClassNameProcessor());
-```
-
-The above example will output:
-
-```
-Array
-(
-    [count] => 42
-    [class] => MeaningOfLifeCountable
-)
 ```
