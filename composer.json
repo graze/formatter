@@ -1,7 +1,7 @@
 {
     "name": "graze/formatter",
 
-    "description": ":package: Interface for formatting objects into arrays.",
+    "description": ":gem: Interface for formatting objects into arrays.",
 
     "license": "MIT",
 
