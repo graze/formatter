@@ -35,12 +35,12 @@ abstract class AbstractFormatter implements
     use Filter\FilterAwareTrait;
 
     /**
-     * Format the given item, applying all registered processors before returning the result.
+     * Format the given object, applying all registered processors before returning the result.
      *
      * Each processor will get called with two arguments:
      *
-     * * `$data`, the result of calling `generate`
-     * * `$object`, the argument that was passed to `generate`
+     * * `$accumulator`, the result of calling `generate`, or the result of the previous processor
+     * * `$object`, the argument that was passed to `format`
      *
      * Calls `generate` to initally convert `$object` into an array.
      *
@@ -53,19 +53,13 @@ abstract class AbstractFormatter implements
         /**
          * @var array
          */
-        $formatted = $this->generate($object);
+        $accumulator = $this->generate($object);
 
-        if ($this->processors) {
-            // Callable that passes the processor the correct arguments.
-            $process = function(array $data, callable $processor) use ($object) {
-                return $processor($data, $object);
-            };
-
-            // Call each processor with the formatted object.
-            return array_reduce($this->processors, $process, $formatted);
+        foreach ($this->processors as $processor) {
+            $accumulator = $processor($accumulator, $object);
         }
 
-        return $formatted;
+        return $accumulator;
     }
 
     /**
