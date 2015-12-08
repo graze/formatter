@@ -11,10 +11,10 @@
  * @license https://github.com/graze/formatter/blob/master/LICENSE MIT
  */
 
-namespace Graze\Formatter;
+namespace Graze\Formatter\Filter;
 
 /**
- * This trait provides an implementation for {@see Graze\Formatter\FilterAwareInterface}.
+ * This trait provides an implementation for {@see Graze\Formatter\Filter\FilterAwareInterface}.
  *
  * @author Samuel Parkinson <sam@graze.com>
  */

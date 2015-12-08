@@ -11,7 +11,7 @@
  * @license https://github.com/graze/formatter/blob/master/LICENSE MIT
  */
 
-use Graze\Formatter\AbstractProcessor;
+use Graze\Formatter\Processor\AbstractProcessor;
 
 /**
  * A mock of a processor.

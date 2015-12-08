@@ -14,26 +14,25 @@
 namespace Graze\Formatter;
 
 use function Graze\Sort\schwartzian;
+use Graze\Formatter\Filter;
 use Graze\Formatter\FormatterInterface;
-use Graze\Formatter\ProcessorAwareInterface;
-use Graze\Formatter\ProcessorAwareTrait;
-use Graze\Formatter\SorterAwareInterface;
-use Graze\Formatter\SorterAwareTrait;
+use Graze\Formatter\Processor;
+use Graze\Formatter\Sorter;
 
 /**
  * @author Samuel Parkinson <sam@graze.com>
  */
 abstract class AbstractFormatter implements
     FormatterInterface,
-    ProcessorAwareInterface,
-    SorterAwareInterface,
-    FilterAwareInterface
+    Processor\ProcessorAwareInterface,
+    Sorter\SorterAwareInterface,
+    Filter\FilterAwareInterface
 {
-    use ProcessorAwareTrait;
+    use Processor\ProcessorAwareTrait;
 
-    use SorterAwareTrait;
+    use Sorter\SorterAwareTrait;
 
-    use FilterAwareTrait;
+    use Filter\FilterAwareTrait;
 
     /**
      * Format the given item, applying all registered processors before returning the result.

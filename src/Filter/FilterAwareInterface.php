@@ -11,19 +11,19 @@
  * @license https://github.com/graze/formatter/blob/master/LICENSE MIT
  */
 
-namespace Graze\Formatter;
+namespace Graze\Formatter\Filter;
 
 /**
- * Describes a processor-aware instance.
+ * Describes a filter-aware instance.
  *
  * @author Samuel Parkinson <sam@graze.com>
  */
-interface ProcessorAwareInterface
+interface FilterAwareInterface
 {
     /**
-     * @param callable $processor
+     * @param callable $filter
      *
      * @return Graze\Formatter\FormatterInterface
      */
-    public function addProcessor(callable $processor);
+    public function addFilter(callable $filter);
 }

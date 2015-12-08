@@ -11,7 +11,7 @@
  * @license https://github.com/graze/formatter/blob/master/LICENSE MIT
  */
 
-namespace Graze\Formatter;
+namespace Graze\Formatter\Processor;
 
 /**
  * Abstract class that can be passed to the `addProcessor` method

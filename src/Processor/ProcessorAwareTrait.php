@@ -11,10 +11,10 @@
  * @license https://github.com/graze/formatter/blob/master/LICENSE MIT
  */
 
-namespace Graze\Formatter;
+namespace Graze\Formatter\Processor;
 
 /**
- * This trait provides an implementation for {@see Graze\Formatter\ProcessorAwareInterface}.
+ * This trait provides an implementation for {@see Graze\Formatter\Processor\ProcessorAwareInterface}.
  *
  * @author Samuel Parkinson <sam@graze.com>
  */

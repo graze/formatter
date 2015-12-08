@@ -11,31 +11,19 @@
  * @license https://github.com/graze/formatter/blob/master/LICENSE MIT
  */
 
-namespace Graze\Formatter;
+namespace Graze\Formatter\Sorter;
 
 /**
- * This trait provides an implementation for {@see Graze\Formatter\SorterAwareInterface}.
+ * Describes a sorter-aware instance.
  *
  * @author Samuel Parkinson <sam@graze.com>
  */
-trait SorterAwareTrait
+interface SorterAwareInterface
 {
     /**
-     * @var callable[]
-     */
-    protected $sorters = [];
-
-    /**
-     * Add the sorter to the top of the stack.
-     *
      * @param callable $sorter
      *
      * @return Graze\Formatter\FormatterInterface
      */
-    public function addSorter(callable $sorter)
-    {
-        array_unshift($this->sorters, $sorter);
-
-        return $this;
-    }
+    public function addSorter(callable $sorter);
 }

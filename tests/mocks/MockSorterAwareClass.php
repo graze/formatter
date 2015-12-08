@@ -11,7 +11,7 @@
  * @license https://github.com/graze/formatter/blob/master/LICENSE MIT
  */
 
-use Graze\Formatter\SorterAwareTrait;
+use Graze\Formatter\Sorter\SorterAwareTrait;
 
 /**
  * A mock that uses the {@see SorterAwareTrait} trait.

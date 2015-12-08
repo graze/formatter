@@ -11,21 +11,20 @@
  * @license https://github.com/graze/formatter/blob/master/LICENSE MIT
  */
 
-use Graze\Formatter\ProcessorAwareInterface;
-use Graze\Formatter\ProcessorAwareTrait;
+use Graze\Formatter\Filter\FilterAwareTrait;
 
 /**
- * A mock that uses the {@see ProcessorAwareTrait} trait.
+ * A mock that uses the {@see FilterAwareTrait} trait.
  */
-class MockProcessorAwareClass implements ProcessorAwareInterface
+class MockFilterAwareClass
 {
-    use ProcessorAwareTrait;
+    use FilterAwareTrait;
 
     /**
      * @return array
      */
-    public function getProcessors()
+    public function getFilters()
     {
-        return $this->processors;
+        return $this->filters;
     }
 }

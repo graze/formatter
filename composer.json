@@ -24,6 +24,7 @@
 
     "autoload-dev": {
         "classmap": [
+            "tests/mocks/",
             "tests/unit/"
         ]
     },
