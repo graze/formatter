@@ -1,23 +1,24 @@
 # graze/formatter
 
-[![Build Status][ico-build]][travis]
-[![Latest Version][ico-package]][package]
-[![PHP ~5.6][ico-engine]][lang]
+[![Build Status][ico-travis]][travis]
+[![Latest Version][ico-packagist]][packagist]
 [![MIT Licensed][ico-license]][license]
+
+<!-- Images -->
+[ico-travis]: https://img.shields.io/travis/graze/formatter/master.svg
+[ico-packagist]: https://img.shields.io/packagist/v/graze/formatter.svg
+[ico-license]: https://img.shields.io/packagist/l/graze/formatter.svg
 
 <!-- Links -->
 [travis]: https://travis-ci.org/graze/queue
-[lang]: https://secure.php.net
-[package]: https://packagist.org/packages/graze/queue
+[packagist]: https://packagist.org/packages/graze/queue
 [license]: https://github.com/graze/queue/blob/master/LICENSE
 
-<!-- Images -->
-[ico-license]: https://img.shields.io/packagist/l/graze/formatter.svg
-[ico-package]: https://img.shields.io/packagist/v/graze/formatter.svg
-[ico-build]: https://img.shields.io/travis/graze/formatter/master.svg
-[ico-engine]: https://img.shields.io/badge/php-%3E%3D5.6-8892BF.svg
+Convert objects into arrays of data by applying [processors](docs/01-processors.md), [filters](docs/02-filters.md), and [sorters](docs/03-sorters.md).
 
-Convert objects into arrays of data by applying [processors](docs/10_processors.md), [filters](docs/20_filters.md), and [sorters](docs/30_sorters.md).
+## Installation
+
+We recommend installing this library with [Composer](https://getcomposer.org).
 
 ```bash
 ~$ composer require graze/formatter
