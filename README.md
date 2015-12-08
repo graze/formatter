@@ -17,7 +17,7 @@
 [ico-build]: https://img.shields.io/travis/graze/formatter/master.svg
 [ico-engine]: https://img.shields.io/badge/php-%3E%3D5.6-8892BF.svg
 
-Convert objects into data arrays.
+Convert objects into arrays of data by applying [processors](docs/10_processors.md), [filters](docs/20_filters.md), and [sorters](docs/30_sorters.md).
 
 ```bash
 ~$ composer require graze/formatter
@@ -26,39 +26,66 @@ Convert objects into data arrays.
 ## Usage
 
 ```php
-// Create a concrete formatter ...
+// Create a formatter ...
 class CountableFormatter extends \Graze\Formatter\AbstractFormatter
 {
-    protected function generate($item)
+    protected function generate($object)
     {
-        if (! $item instanceof Countable) {
-            throw new \InvalidArgumentException(sprintf('`$item` must be an instance of %s.', Countable::class));
+        if (! $object instanceof Countable) {
+            throw new \InvalidArgumentException(sprintf('`$object` must be an instance of %s.', Countable::class));
         }
 
         return [
-            'count' => $item->count(),
+            'count' => $object->count(),
         ];
     }
 }
 
+// ... processor ...
+$processor = function (array $data, Countable $object) {
+    // Let's add the square of count.
+    $data['square'] = $data['count'] ** 2;
+
+    return $data;
+};
+
+// ... filter ...
+$filter = function (array $data) {
+    // Remove elements with a count of 126.
+    return $data['count'] !== 126;
+};
+
+// ... sorter ...
+$sorter = function (array $data) {
+    // Sort by count in descending order.
+    return $data['count'] * -1;
+};
+
 // ... and something we can format.
-class MeaningOfLifeCountable implements Countable
+class ExampleCountable implements Countable
 {
+    private $count = 0;
+
     public function count()
     {
-        return 42;
+        return $this->count += 1;
     }
 }
 
-$countable = new MeaningOfLifeCountable();
-$formatter = new CountableFormatter();
+$countable = new ExampleCountable();
 
-// Format a single item.
+// Create a new instance of the formatter, and register all the callables.
+$formatter = new CountableFormatter();
+$formatter->addProcessor($processor);
+$formatter->addFilter($filter);
+$formatter->addSorter($sorter);
+
+// Format a single object.
 $result = $formatter->format($countable);
 
 print_r($result);
 
-// Format several items.
+// Format several objects.
 $result = $formatter->formatMany([$countable, $countable, $countable]);
 
 print_r($result);
@@ -69,23 +96,27 @@ The above example will output:
 ```
 Array
 (
-    [count] => 42
+    [count] => 1
+    [square] => 1
 )
 Array
 (
     [0] => Array
         (
-            [count] => 42
+            [count] => 4
+            [square] => 16
         )
 
     [1] => Array
         (
-            [count] => 42
+            [count] => 3
+            [square] => 9
         )
 
     [2] => Array
         (
-            [count] => 42
+            [count] => 2
+            [square] => 4
         )
 
 )
