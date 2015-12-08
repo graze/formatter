@@ -14,10 +14,10 @@ $processor = function (array $data, $item) {
 $formatter->addProcessor($processor);
 ```
 
-## Using Graze\Formatter\AbstractProcessor
+## Using `AbstractProcessor`
 
 ```php
-use Graze\Formatter\AbstractProcessor;
+use Graze\Formatter\Processor\AbstractProcessor;
 
 final class ClassNameProcessor extends AbstractProcessor
 {
