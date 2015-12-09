@@ -1,4 +1,4 @@
-<phpunit colors="true" verbose="true">
+<phpunit colors="true" verbose="true" bootstrap="tests/bootstrap.php">
 
     <!-- Test suites -->
     <testsuites>
