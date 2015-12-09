@@ -10,9 +10,9 @@
 [ico-license]: https://img.shields.io/packagist/l/graze/formatter.svg
 
 <!-- Links -->
-[travis]: https://travis-ci.org/graze/queue
-[packagist]: https://packagist.org/packages/graze/queue
-[license]: https://github.com/graze/queue/blob/master/LICENSE
+[travis]: https://travis-ci.org/graze/formatter
+[packagist]: https://packagist.org/packages/graze/formatter
+[license]: https://github.com/graze/formatter/blob/master/LICENSE
 
 Convert objects into arrays of data by applying [processors](docs/01-processors.md), [filters](docs/02-filters.md), and [sorters](docs/03-sorters.md).
 
