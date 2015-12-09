@@ -26,10 +26,7 @@ class FilterAwareTraitTest extends \PHPUnit_Framework_TestCase
 
         $mock->addFilter($filter);
 
-        assertThat('There should only be one filter added.',
-            $mock->getFilters(), is(arrayWithSize(1)));
-
-        assertThat('The filter should be the one we added.',
-            reset($mock->getFilters()), is($filter));
+        assertThat('There should only be the one filter we added.',
+            $mock->getFilters(), is(arrayContaining($filter)));
     }
 }

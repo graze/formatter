@@ -26,10 +26,7 @@ class ProcessorAwareTraitTest extends \PHPUnit_Framework_TestCase
 
         $mock->addProcessor($processor);
 
-        assertThat('There should only be one processor added.',
-            $mock->getProcessors(), is(arrayWithSize(1)));
-
-        assertThat('The processor should be the one we added.',
-            reset($mock->getProcessors()), is($processor));
+        assertThat('There should only be the one processor we added.',
+            $mock->getProcessors(), is(arrayContaining($processor)));
     }
 }

@@ -26,11 +26,8 @@ class SorterAwareTraitTest extends \PHPUnit_Framework_TestCase
 
         $mock->addSorter($sorter);
 
-        assertThat('There should only be one sorter added.',
-            $mock->getSorters(), is(arrayWithSize(1)));
-
-        assertThat('The sorter should be the one we added.',
-            reset($mock->getSorters()), is($sorter));
+        assertThat('There should only be the one sorter we added.',
+            $mock->getSorters(), is(arrayContaining($sorter)));
     }
 
     public function testTraitShouldAddSortersAsTheFirstSorterInTheCollection()
