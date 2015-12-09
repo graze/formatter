@@ -18,12 +18,19 @@ use Graze\Formatter\Filter;
 use Graze\Formatter\FormatterInterface;
 use Graze\Formatter\Processor;
 use Graze\Formatter\Sorter;
+use Graze\Formatter\TraversableFormatterInterface;
+use Traversable;
 
 /**
+ * An abstract implmentation of the formatter interfaces.
+ *
+ * Extend this class and implement `generate` to get started with formatters.
+ *
  * @author Samuel Parkinson <sam@graze.com>
  */
 abstract class AbstractFormatter implements
     FormatterInterface,
+    TraversableFormatterInterface,
     Processor\ProcessorAwareInterface,
     Sorter\SorterAwareInterface,
     Filter\FilterAwareInterface
@@ -80,6 +87,32 @@ abstract class AbstractFormatter implements
     }
 
     /**
+     * Format a Traversable group of objects, applying all registered processors
+     * and filters before returning the result as a Generator.
+     *
+     * NOTE: This method doesn't apply any sorters to the result.
+     *
+     * @param Traversable $objects
+     *
+     * @return Generator
+     */
+    public function formatTraversable(Traversable $objects)
+    {
+        foreach ($objects as $object) {
+            $formatted = $this->format($object);
+
+            // Apply any registered filters, skipping this object if the filter does't return `true`.
+            foreach ($this->filters as $filter) {
+                if (! $filter($formatted)) {
+                    continue 2;
+                }
+            }
+
+            yield $formatted;
+        }
+    }
+
+    /**
      * Convert the `$object` argument into a formatted array of data.
      *
      * @param mixed $object
@@ -91,6 +124,8 @@ abstract class AbstractFormatter implements
     /**
      * Interate over each filter registered with the formatter and remove
      * any matching elements.
+     *
+     * NOTE: `array_filter` will remove values when the callback doesn't return `true`.
      *
      * @param array $unfiltered
      *
