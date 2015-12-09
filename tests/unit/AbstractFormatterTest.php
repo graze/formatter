@@ -13,6 +13,17 @@
 
 class AbstractFormatterTest extends \PHPUnit_Framework_TestCase
 {
+    public function testFormatterImplementsInterfaces()
+    {
+        $formatter = new MockFormatter();
+
+        assertThat($formatter, is(anInstanceOf(FormatterInterface::class)));
+
+        assertThat($formatter, is(anInstanceOf(FilterAwareInterface::class)));
+        assertThat($formatter, is(anInstanceOf(ProcessorAwareInterface::class)));
+        assertThat($formatter, is(anInstanceOf(SorterAwareInterface::class)));
+    }
+
     public function testShouldFormatAccordingToGenerateMethod()
     {
         $formatter = new MockFormatter();

@@ -53,7 +53,7 @@ abstract class AbstractFormatter implements
         /**
          * @var array
          */
-        $accumulator = $this->generate($object);
+        $accumulator = $this->convert($object);
 
         foreach ($this->processors as $processor) {
             $accumulator = $processor($accumulator, $object);
@@ -86,7 +86,7 @@ abstract class AbstractFormatter implements
      *
      * @return array
      */
-    abstract protected function generate($object);
+    abstract protected function convert($object);
 
     /**
      * Interate over each filter registered with the formatter and remove
