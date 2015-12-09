@@ -115,7 +115,20 @@ class AbstractFormatterTest extends \PHPUnit_Framework_TestCase
             $result, is(anArray($expected)));
     }
 
-    // Should handle filters.
+    public function testFormatManyShouldApplyFilters()
+    {
+        $items = ['foo', 'bar', 'baz'];
+
+        $formatter = new MockFormatter();
+        $formatter->addFilter(function (array $data) {
+            return $data['count'] !== 2;
+        });
+
+        $result = $formatter->formatMany($items);
+
+        assertThat('The formatter should correctly apply the filter.',
+            $result, is(arrayContaining(['count' => 1], ['count' => 3])));
+    }
 
     public function testFormatManyShouldApplySorters()
     {
