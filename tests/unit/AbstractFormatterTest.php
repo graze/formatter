@@ -11,6 +11,11 @@
  * @license https://github.com/graze/formatter/blob/master/LICENSE MIT
  */
 
+use Graze\Formatter\Filter\FilterAwareInterface;
+use Graze\Formatter\FormatterInterface;
+use Graze\Formatter\Processor\ProcessorAwareInterface;
+use Graze\Formatter\Sorter\SorterAwareInterface;
+
 class AbstractFormatterTest extends \PHPUnit_Framework_TestCase
 {
     public function testFormatterImplementsInterfaces()
@@ -19,8 +24,8 @@ class AbstractFormatterTest extends \PHPUnit_Framework_TestCase
 
         assertThat($formatter, is(anInstanceOf(FormatterInterface::class)));
 
-        assertThat($formatter, is(anInstanceOf(FilterAwareInterface::class)));
         assertThat($formatter, is(anInstanceOf(ProcessorAwareInterface::class)));
+        assertThat($formatter, is(anInstanceOf(FilterAwareInterface::class)));
         assertThat($formatter, is(anInstanceOf(SorterAwareInterface::class)));
     }
 

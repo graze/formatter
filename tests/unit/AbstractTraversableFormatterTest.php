@@ -11,8 +11,17 @@
  * @license https://github.com/graze/formatter/blob/master/LICENSE MIT
  */
 
+use Graze\Formatter\TraversableFormatterInterface;
+
 class AbstractTraversableFormatterTest extends \PHPUnit_Framework_TestCase
 {
+    public function testFormatterImplementsInterfaces()
+    {
+        $formatter = new MockFormatter();
+
+        assertThat($formatter, is(anInstanceOf(TraversableFormatterInterface::class)));
+    }
+
     public function testShouldFormatTraversableAccordingToGenerateMethod()
     {
         $items = ['foo', 'bar', 'baz'];
