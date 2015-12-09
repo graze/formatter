@@ -30,7 +30,7 @@ We recommend installing this library with [Composer](https://getcomposer.org).
 // Create a formatter ...
 class CountableFormatter extends \Graze\Formatter\AbstractFormatter
 {
-    protected function generate($object)
+    protected function convert($object)
     {
         if (! $object instanceof Countable) {
             throw new \InvalidArgumentException(sprintf('`$object` must be an instance of %s.', Countable::class));

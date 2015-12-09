@@ -2,7 +2,7 @@
 
 Filters can be used to remove formatted objects from the final result.
 
-Filters are only applied when calling `FormatterInterface::formatMany`.
+Filters are only applied when calling `FormatterInterface::formatMany` or `FormatterInterface::formatTraversable`.
 
 ## Usage
 

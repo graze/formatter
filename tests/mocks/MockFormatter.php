@@ -14,7 +14,7 @@
 use Graze\Formatter\AbstractFormatter;
 
 /**
- * A mock of a formatter that returns the number of times `generate` has been called.
+ * A mock of a formatter that returns the number of times `convert` has been called.
  */
 class MockFormatter extends AbstractFormatter
 {

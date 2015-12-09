@@ -29,7 +29,7 @@ class AbstractFormatterTest extends \PHPUnit_Framework_TestCase
         assertThat($formatter, is(anInstanceOf(SorterAwareInterface::class)));
     }
 
-    public function testShouldFormatAccordingToGenerateMethod()
+    public function testShouldFormatAccordingToConvertMethod()
     {
         $formatter = new MockFormatter();
 
@@ -42,7 +42,7 @@ class AbstractFormatterTest extends \PHPUnit_Framework_TestCase
             $result, is(anArray(['count' => 1])));
     }
 
-    public function testShouldFormatManyAccordingToGenerateMethod()
+    public function testShouldFormatManyAccordingToConvertMethod()
     {
         $items = ['foo', 'bar', 'baz'];
 

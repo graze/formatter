@@ -13,7 +13,7 @@ use Graze\Formatter\AbstractFormatter;
 
 class CountableFormatter extends AbstractFormatter
 {
-    protected function generate($object)
+    protected function convert($object)
     {
         if (! $object instanceof Countable) {
             throw new \InvalidArgumentException(sprintf('`$object` must be an instance of %s.', Countable::class));

@@ -22,7 +22,7 @@ class AbstractTraversableFormatterTest extends \PHPUnit_Framework_TestCase
         assertThat($formatter, is(anInstanceOf(TraversableFormatterInterface::class)));
     }
 
-    public function testShouldFormatTraversableAccordingToGenerateMethod()
+    public function testShouldFormatTraversableAccordingToConvertMethod()
     {
         $items = ['foo', 'bar', 'baz'];
 

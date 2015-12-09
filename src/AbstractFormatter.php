@@ -24,7 +24,7 @@ use Traversable;
 /**
  * An abstract implmentation of the formatter interfaces.
  *
- * Extend this class and implement `generate` to get started with formatters.
+ * Extend this class and implement `convert` to get started with formatters.
  *
  * @author Samuel Parkinson <sam@graze.com>
  */
@@ -46,10 +46,10 @@ abstract class AbstractFormatter implements
      *
      * Each processor will get called with two arguments:
      *
-     * * `$accumulator`, the result of calling `generate`, or the result of the previous processor
+     * * `$accumulator`, the result of calling `convert`, or the result of the previous processor
      * * `$object`, the argument that was passed to `format`
      *
-     * Calls `generate` to initally convert `$object` into an array.
+     * Calls `convert` to initally convert `$object` into an array.
      *
      * @param mixed $object
      *
