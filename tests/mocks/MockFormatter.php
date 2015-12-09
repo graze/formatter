@@ -20,7 +20,7 @@ class MockFormatter extends AbstractFormatter
 {
     private $count = 0;
 
-    protected function generate($item)
+    protected function convert($item)
     {
         $this->count += 1;
 
