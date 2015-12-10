@@ -1,7 +1,7 @@
 {
     "name": "graze/formatter",
 
-    "description": ":gem: Interface for formatting objects into arrays.",
+    "description": "Convert objects into arrays of data by applying processors, filters, and sorters.",
 
     "license": "MIT",
 
