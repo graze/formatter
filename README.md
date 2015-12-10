@@ -1,5 +1,7 @@
 # graze/formatter
 
+<img src="https://i.imgur.com/W0EqkXO.gif" width="250" align="right">
+
 [![Build Status][ico-travis]][travis]
 [![Latest Version][ico-packagist]][packagist]
 [![MIT Licensed][ico-license]][license]
