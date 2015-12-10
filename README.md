@@ -54,8 +54,8 @@ $processor = function (array $data, Countable $object) {
 
 // ... filter ...
 $filter = function (array $data) {
-    // Remove elements with a count of 126.
-    return $data['count'] !== 126;
+    // Remove elements with a square of 9.
+    return $data['square'] !== 9;
 };
 
 // ... sorter ...
@@ -111,12 +111,6 @@ Array
         )
 
     [1] => Array
-        (
-            [count] => 3
-            [square] => 9
-        )
-
-    [2] => Array
         (
             [count] => 2
             [square] => 4
