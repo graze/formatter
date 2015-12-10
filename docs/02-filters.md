@@ -4,6 +4,8 @@ Filters can be used to remove formatted objects from the final result.
 
 Filters are only applied when calling `FormatterInterface::formatMany` or `FormatterInterface::formatTraversable`.
 
+The callable should be an implementation of the `$callback` parameter defined in the [`array_filter`](https://secure.php.net/manual/en/function.array-filter.php) function. Returning `true` if the element should **not** be filtered.
+
 ## Usage
 
 ```php
