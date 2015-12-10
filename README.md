@@ -16,6 +16,8 @@
 
 Convert objects into arrays of data by applying [processors](docs/01-processors.md), [filters](docs/02-filters.md), and [sorters](docs/03-sorters.md).
 
+Read more about why we made this library in our [blog post](http://tech.graze.com/2015/12/10/graze-formatter/).
+
 ## Installation
 
 We recommend installing this library with [Composer](https://getcomposer.org).
