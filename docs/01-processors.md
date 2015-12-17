@@ -5,8 +5,8 @@ Processors can be used to extend the functionality of a formatter.
 ## Using Anonymous Functions
 
 ```php
-$processor = function (array $data, $item) {
-    $data['class'] = get_class($item);
+$processor = function (array $data, $object) {
+    $data['class'] = get_class($object);
 
     return $data;
 };
@@ -21,9 +21,9 @@ use Graze\Formatter\Processor\AbstractProcessor;
 
 final class ClassNameProcessor extends AbstractProcessor
 {
-    protected function process(array $data, $item)
+    protected function process(array $data, $object)
     {
-        $data['class'] = get_class($item);
+        $data['class'] = get_class($object);
 
         return $data;
     }
