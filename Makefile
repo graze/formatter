@@ -18,17 +18,17 @@ composer-%: ## Run a composer command, `make "composer-<command> [...]"`.
 	composer/composer --no-interaction $*
 
 test: ## Run the unit and intergration testsuites.
-test: test-unit
+test: test-unit test-benchmark
 
 test-unit: ## Run the unit testsuite.
-	docker run --rm -t -v $$(pwd):/opt/graze/queue -w /opt/graze/queue php:5.6-cli \
+	docker run --rm -t -v $$(pwd):/opt/graze/formatter -w /opt/graze/formatter php:5.6-cli \
 	vendor/bin/phpunit --testsuite unit
-	docker run --rm -t -v $$(pwd):/opt/graze/queue -w /opt/graze/queue php:7.0-cli \
+	docker run --rm -t -v $$(pwd):/opt/graze/formatter -w /opt/graze/formatter php:7.0-cli \
 	vendor/bin/phpunit --testsuite unit
 
-test-coverage: ## Run the testsuites with coverage enabled.
-	docker run --rm -t -v $$(pwd):/opt/graze/queue -w /opt/graze/queue php:5.6-cli \
-	vendor/bin/phpunit --coverage-text --testsuite unit
+test-benchmark:
+	docker run --rm -t -v $$(pwd):/opt/graze/formatter -w /opt/graze/formatter php:7.0-cli \
+	php tests/benchmark/benchmark.php
 
 clean: ## Stop running containers and clean up an images.
 	rm -rf vendor/

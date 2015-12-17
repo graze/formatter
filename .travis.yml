@@ -17,3 +17,4 @@ install:
 
 script:
   - vendor/bin/phpunit --testsuite unit
+  - php tests/benchmark/benchmark.php
