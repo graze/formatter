@@ -48,7 +48,7 @@ class BenchmarkCountable implements Countable
 $benchmark = function ($formatter) {
     $results = [];
 
-    foreach(range(0, 20) as $i) {
+    foreach(range(0, 5) as $i) {
         $start = microtime(true);
 
         $countable = new BenchmarkCountable();
