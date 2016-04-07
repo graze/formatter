@@ -13,7 +13,6 @@
 
 namespace Graze\Formatter;
 
-use function Graze\Sort\schwartzian;
 use Graze\Formatter\Filter;
 use Graze\Formatter\FormatterInterface;
 use Graze\Formatter\Processor;
@@ -150,7 +149,7 @@ abstract class AbstractFormatter implements
     private function sort(array $unsorted)
     {
         if ($this->sorters) {
-            return schwartzian($unsorted, $this->sorters);
+            return \Graze\Sort\schwartzian($unsorted, $this->sorters);
         }
 
         return $unsorted;

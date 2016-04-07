@@ -6,6 +6,7 @@ SHELL = /bin/sh
 .SILENT: help
 
 install: ## Download the depenedencies then build the image :rocket:.
+	docker pull php:5.5-cli
 	docker pull php:5.6-cli
 	docker pull php:7.0-cli
 	make 'composer-update --optimize-autoloader --ignore-platform-reqs'
@@ -21,6 +22,8 @@ test: ## Run the unit and intergration testsuites.
 test: test-unit test-benchmark
 
 test-unit: ## Run the unit testsuite.
+	docker run --rm -t -v $$(pwd):/opt/graze/formatter -w /opt/graze/formatter php:5.5-cli \
+	vendor/bin/phpunit --testsuite unit
 	docker run --rm -t -v $$(pwd):/opt/graze/formatter -w /opt/graze/formatter php:5.6-cli \
 	vendor/bin/phpunit --testsuite unit
 	docker run --rm -t -v $$(pwd):/opt/graze/formatter -w /opt/graze/formatter php:7.0-cli \
